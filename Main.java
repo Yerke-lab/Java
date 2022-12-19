@@ -29,7 +29,6 @@ public class Main {
                 if (listProducts.get(i).getGrade().equals(search)) {
                     setGrade.add(listProducts.get(i).getGrade());
                     setName.add(listProducts.get(i).getName());
-                    if (listProducts.get(i).getPrice() > maxPrice) {
                     maxPrice = listProducts.get(i).getPrice();
                 }
             }
