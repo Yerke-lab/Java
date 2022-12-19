@@ -1,36 +1,41 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-/**при входном массиве, вернуть массив массивов со всеми перестановками его элементов. (со звездочкой)
-        Пример входных данных:
-        [1,2,3]
-        Пример выходных данных:
-        [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]*/
-
+/**
+ * Дан массив записей: наименование товара, цена, сорт.
+ * Найти наибольшую цену товаров 1го сорта среди товаров, название которых содержит «высший».
+ */
 public class Main {
     public static void main(String[] args) {
-        int[] arr = new int[]{1,2,3};
-        int count = factorial(arr.length);
-        int max = arr.length - 1;
-        int shift = max;
-        while (count > 0) {
-            int t = arr[shift];
-            arr[shift] = arr[shift - 1];
-            arr[shift - 1] = t;
-            print(arr);
-            count--;
-            if (shift < 2) {
-                shift = max;
-            } else {
-                shift--;
+        Products products1 = new Products("высший", "1", 200);
+        Products products2 = new Products("высший", "1", 180);
+        Products products3 = new Products("средний", "1", 185);
+        Products products4 = new Products("высший", "2", 176);
+        Products products5 = new Products("высший", "1", 205);
+        List<Products> listProducts = new ArrayList<>();
+        listProducts.add(products1);
+        listProducts.add(products2);
+        listProducts.add(products3);
+        listProducts.add(products4);
+        listProducts.add(products5);
+        String search="1";
+        Integer maxPrice = 0;
+        Set<String> setName = new HashSet<>();
+        Set<String> setGrade = new HashSet<>();
+        for (int i = 0; i < listProducts.size(); i++) {
+            if (listProducts.get(i).getName().equals("высший")) {
+                if (listProducts.get(i).getGrade().equals(search)) {
+                    setGrade.add(listProducts.get(i).getGrade());
+                    setName.add(listProducts.get(i).getName());
+                    maxPrice = listProducts.get(i).getPrice();
+                }
             }
         }
-    }
+        System.out.println("setName= " + setName);
+        System.out.println("setGrade= " + setGrade);
+        System.out.println("maxPrice= " + maxPrice);
 
-    static void print(int[] arr) {
-        System.out.println(Arrays.toString(arr));
-    }
-
-    static int factorial(int n) {
-        return (n > 0) ? n * factorial(n - 1) : 1;
     }
 }
